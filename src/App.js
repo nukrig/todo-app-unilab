@@ -1,11 +1,20 @@
 import GlobalStyles from "./Components/GlobalStyle";
+import { BrowserRouter,Routes,Route } from "react-router-dom";
 import StarterPage from "./Components/StarterPage";
+import SignUpPage from "./Components/SignUpPage";
+import ToDosPage from "./Components/ToDosPage";
 
 function App() {
   return (
     <>
       <GlobalStyles/>
-      <StarterPage/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<StarterPage/>} />
+          <Route path="/SignUp" element={<SignUpPage/>} />
+          <Route path="/ToDos" element={<ToDosPage/>} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
