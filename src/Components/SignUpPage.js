@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SignUpPage() {
-    // const [photoUrl,setPhotoUrl]=useState('')
-    // const [name,setName] = useState('')
     const [photoUrl, setPhotoUrl] = useState(localStorage.getItem('photoUrl') || '');
     const [name, setName] = useState(localStorage.getItem('name') || '');
     const [allowNextPage,setAllowNextPage]=useState('')
@@ -46,8 +44,7 @@ function SignUpPage() {
             navigate('/ToDos', { state: { photoUrl, name } })
         }
     },[allowNextPage])
-    // const photoUrlFromLocal = localStorage.getItem('photoUrl');
-    // const nameFromLocal = localStorage.getItem('name');
+
   return (
     <StarterDiv>
         <Form>
@@ -68,7 +65,6 @@ function SignUpPage() {
                 setName(e.target.value)
             }}
             />
-            {/* <Link to={'/'}><SignUpBtn onClick={handleSignIn}>Sign In</SignUpBtn> </Link> */}
             <SignUpBtn onClick={handleSignIn}>Sign In</SignUpBtn>
             
         </Form>
