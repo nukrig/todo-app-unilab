@@ -84,8 +84,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 padding: 33px 50.5px;
-margin-right: 20px;
-margin-left: 20px;
+margin:40px 20px;
 @media (max-width:600px){
     padding: 33px 0;
 }
