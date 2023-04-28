@@ -1,58 +1,78 @@
-import { useLocation } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import styled from "styled-components";
 import { ProfilePhoto } from './SignUpPage';
-import { useEffect, useRef, useState } from "react";
+import { useEffect,useState } from "react";
 import doneIcon from '../media/doneicon.svg'
 import deleteIcon from '../media/deleteicon.svg'
+import todos from './data';
 
 function ToDosPage() {
-    const { state } = useLocation();
-    const { photoUrl, name } = state;
-    const todos = [
-      { id: 0, text: 'Lecture', done: false },
-      { id: 1, text: 'Homework', done: false },
-      { id: 2, text: 'Workout', done: false },
-      { id: 3, text: 'Sleep', done: false }
-    ]
-    const [todoList,setTodoList]=useState(todos)
-    const [isDone, setIsDone] = useState(false)
-    const [newTodo,setNewTodo]=useState(localStorage.getItem('newTodo') || '')
+  const photoUrl = localStorage.getItem('photoUrl')
+  const name = localStorage.getItem('name')
 
-    useEffect(()=>{
-      localStorage.setItem('newTodo', newTodo);
-},[todos])
+  const [todoList,setTodoList]=useState(JSON.parse(localStorage.getItem('todoList')) || todos)
+  const [isDone, setIsDone] = useState(false)
+  const [newTodo,setNewTodo]=useState(localStorage.getItem('newTodo') || '')
+  const [isLoggedIn,setIsLoggedIn]=useState(true)
 
-    function handleClickAdd()  {
-      if(newTodo.length > 0){
-        todoList.push({id: todoList.length  , text: newTodo, done:false})
-      }
-      setIsDone(!isDone)
-      console.log(todoList);
+  const navigate = useNavigate()
+  
+  useEffect(()=>{
+    if(!photoUrl || name === ''){
+      setIsLoggedIn(true)
+      navigate('/')
     }
-    const handleClickDone = (todoId) => {
-      const updatedTodos = todoList.map((todo) =>
-        todo.id == todoId ? { ...todo, done: !todo.done } : todo
-      );
-      setTodoList(updatedTodos);
-    };
+  },[name,navigate,photoUrl])
 
-    const handleClickDelete = (todoIndex)=>{
-      const newTodos = todoList.filter((todo,index)=>{
-        return todoIndex !== index
-      })
-      setTodoList(newTodos)
+  useEffect(()=>{
+    localStorage.setItem('newTodo', newTodo);
+    localStorage.setItem('todoList',JSON.stringify(todoList))
+  },[newTodo,todoList])
+
+
+  const handleClickAdd = () =>  {
+    if(newTodo.length > 0){
+      todoList.push({id: todoList.length  , text: newTodo, done:false})
+      setNewTodo('')
     }
+      setIsDone(!isDone) 
+  }
+
+  const handleClickDone = (todoId) => {
+    const updatedTodos = todoList.map((todo) =>
+      todo.id === todoId ? { ...todo, done: !todo.done } : todo
+    );
+    setTodoList(updatedTodos);
+  };
+
+  const handleClickDelete = (todoIndex)=>{
+    const newTodos = todoList.filter((todo,index)=>{
+      return todoIndex !== index
+    })
+    setTodoList(newTodos)
+  }
+
+  const handleLogOut = ()=>{
+      navigate('/')
+      localStorage.clear()
+      setIsLoggedIn(false)
+  }
+
   return (
     <>
       <ToDosHeader>
         <Logo>TO DO</Logo>
         <MyInformation>
+
           <UserName>{name}</UserName>
-          <Profile src={photoUrl}/>
+          <Profile src={photoUrl} onClick={()=>{setIsLoggedIn(!isLoggedIn)}}/>
+          {!isLoggedIn ? <LogOutMenu> <span onClick={handleLogOut}>Log Out</span> </LogOutMenu> : ''}
+          
         </MyInformation>
       </ToDosHeader>
       <Container>
           <TodoHeading>Add Your Daily Tasks</TodoHeading>
+          <div style={{width:'100%',display:'flex'}}>
             <AddToDosInput 
             type='text' 
             placeholder='my task'
@@ -62,19 +82,22 @@ function ToDosPage() {
               }}
             />
             <AddBtn onClick={()=> handleClickAdd()}>Add</AddBtn>
-          <ul> 
+          </div>
+          <ul style={{width:'100%'}}> 
           {todoList.map((todo,index)=>{
           return (
           <StyledList key={todo.id} style={{ backgroundColor: todo.done ? 'green' : '' }} > 
             {todo.text} 
-            <div>
+            <div >
               <img src={doneIcon} 
               style={{marginRight:'29.29px',cursor:'pointer'}}
               onClick={()=>handleClickDone(todo.id)}
+              alt='V'
             />
               <img src={deleteIcon}
               style={{cursor:'pointer'}}
               onClick={()=>handleClickDelete(index)}
+              alt='X'
               />
             </div>
           </StyledList>
@@ -90,6 +113,7 @@ export default ToDosPage;
 
 // STYLED COMPONENTS 
 
+// This is header styles
 const ToDosHeader = styled.header`
   width: 100%;
   height: 98px;
@@ -122,14 +146,22 @@ const UserName= styled.h5`
  color: #ffffff;
  font-size: 22px;
  font-weight: 300;
- @media (max-width:550px){
+ @media (max-width:350px){
     display: none;
   }
 `
+
+// this is container styles
+
 const Container = styled.div`
   max-width: 595px;
+  width: 100%;
   margin: 0 auto;
+  margin-bottom: 50px;
   padding: 35px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 const TodoHeading = styled.h1`
   font-size: 42px;
@@ -142,33 +174,44 @@ const TodoHeading = styled.h1`
   }
 `
 const AddToDosInput = styled.input`
-  width: 487px;
+  width: calc(100% - 108px);
   height: 76px;
-  padding: 0 24px;
   margin-bottom: 51px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 4px;
+  background: #e6ebff;
   font-size:22px;
-  background-color:#e6ebff;
-  position: relative;
+  font-weight: 300;
 
   :focus{
         outline: none;
         border: 1px solid #5efc8d;
     }
+  
+  @media (max-width:550px){
+  font-size: 18px;
+  height: 60px;
+  width: calc(100% - 80px);
+  }
 `
 const AddBtn = styled.button`
-  width: 108px;
   width:108px;
   height:76px;
   background-color:#5efc8d;
   border-radius: 4px;
   font-size:32px;
   color:#000000;
-  position: absolute;
   cursor: pointer;
   transition: all .5s;
 
   &:hover{
     background-color: aqua;
+  }
+  @media (max-width:550px){
+    font-size: 22px;
+    height: 60px;
+    width: 80px;
   }
 `
 const StyledList = styled.li`
@@ -192,4 +235,33 @@ const StyledList = styled.li`
   @media (max-width:550px){
     font-size: 18px;
   }
+  @media (max-width:350px){
+    font-size: 15px;
+    padding: 10px;
+  }
 `
+
+const LogOutMenu = styled.div`
+
+  width: 120px;
+  height: 48px;
+
+  top: 90px;
+  right: 5px;
+  position: absolute;
+  border-radius: 6px;
+
+  background: #5EFC8D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-size: 25px;
+  font-weight: 900;
+  opacity: 0.8;
+  cursor: pointer;
+
+  &:hover{
+    background-color: aqua;
+  }
+`;

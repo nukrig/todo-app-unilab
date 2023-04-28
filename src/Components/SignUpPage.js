@@ -8,7 +8,6 @@ function SignUpPage() {
     const [photoUrl, setPhotoUrl] = useState(localStorage.getItem('photoUrl') || '');
     const [name, setName] = useState(localStorage.getItem('name') || '');
     const [allowNextPage,setAllowNextPage]=useState('')
-
     const navigate = useNavigate()
 
     const handlePhotoChange = (event) => {
@@ -27,7 +26,8 @@ function SignUpPage() {
             }else {
                 setAllowNextPage('')
             }
-        }
+    }
+
         useEffect(()=>{
             localStorage.setItem('photoUrl', photoUrl);
             localStorage.setItem('name', name);
@@ -72,6 +72,8 @@ function SignUpPage() {
   );
 }
 export default SignUpPage;
+
+// STYLED COMPONENTS 
 
 const Form = styled.form`
 max-width: 588px;

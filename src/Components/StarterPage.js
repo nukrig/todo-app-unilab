@@ -1,8 +1,21 @@
 import styled from "styled-components";
 import todoImg from '../media/todoImg.svg'
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function StarterPage() {
+  const photoUrl = localStorage.getItem('photoUrl')
+  const name = localStorage.getItem('name')
+  const [isLoggedIn,setIsLoggedIn] = useState(false)
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+    if(photoUrl && name !== ''){
+      setIsLoggedIn(true)
+      navigate('/SignUp')
+      console.log('you are logged in, loggedIn : ', !isLoggedIn);
+    }
+  },[name,navigate,photoUrl])
   
   return (
     <StarterDiv>
@@ -14,6 +27,8 @@ function StarterPage() {
 }
 
 export default StarterPage;
+
+// STYLED COMPONENTS 
 
 export const StarterDiv = styled.div`
   width: 100%;
