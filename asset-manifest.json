@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.js": "/todo-app-unilab/static/js/main.22774120.js",
+    "static/media/todoImg.svg": "/todo-app-unilab/static/media/todoImg.ab12dfb1cba621a56c21e17b4b50593c.svg",
+    "index.html": "/todo-app-unilab/index.html",
+    "static/media/add-photo.svg": "/todo-app-unilab/static/media/add-photo.3096d799b92968f30a6f7e7a2b5c9acc.svg",
+    "static/media/deleteicon.svg": "/todo-app-unilab/static/media/deleteicon.a24197aa271ccbd1a01e2315e286dcaf.svg",
+    "static/media/doneicon.svg": "/todo-app-unilab/static/media/doneicon.2aa07be6c968315034e232e3c83d97f5.svg",
+    "main.22774120.js.map": "/todo-app-unilab/static/js/main.22774120.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.22774120.js"
+  ]
+}
