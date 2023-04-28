@@ -1,4 +1,4 @@
-import { BrowserRouter , Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter , Routes, Route, Navigate } from "react-router-dom";
 import GlobalStyles from "./Components/GlobalStyle";
 import StarterPage from "./Components/StarterPage";
 import SignUpPage from "./Components/SignUpPage";
@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <Routes>
+      <Routes basename="/todo-app-unilab/">
         <Route path="/" element= {<StarterPage/>} />
         <Route path="/SignUp" element= {<SignUpPage/>} />
         <Route path="/ToDos" element= {<ToDosPage/>} />
@@ -20,9 +20,8 @@ function App() {
 
 export default function WrappedApp() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <App />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
-
