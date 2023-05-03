@@ -12,7 +12,7 @@ function StarterPage() {
   useEffect(()=>{
     if(photoUrl && name !== ''){
       setIsLoggedIn(true)
-      navigate('/SignUp')
+      navigate('/ToDos')
       console.log('you are logged in, loggedIn : ', !isLoggedIn);
     }
   },[name,navigate,photoUrl])

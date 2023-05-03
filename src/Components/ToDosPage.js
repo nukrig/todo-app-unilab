@@ -63,13 +63,14 @@ function ToDosPage() {
       <ToDosHeader>
         <Logo>TO DO</Logo>
         <MyInformation>
-
-          <UserName>{name}</UserName>
+          
+          <UserName onClick={()=>{setIsLoggedIn(!isLoggedIn)}}>{name}</UserName>
           <Profile src={photoUrl} onClick={()=>{setIsLoggedIn(!isLoggedIn)}}/>
           {!isLoggedIn ? <LogOutMenu> <span onClick={handleLogOut}>Log Out</span> </LogOutMenu> : ''}
           
         </MyInformation>
       </ToDosHeader>
+      
       <Container>
           <TodoHeading>Add Your Daily Tasks</TodoHeading>
           <div style={{width:'100%',display:'flex'}}>
@@ -83,10 +84,11 @@ function ToDosPage() {
             />
             <AddBtn onClick={()=> handleClickAdd()}>Add</AddBtn>
           </div>
+
           <ul style={{width:'100%'}}> 
           {todoList.map((todo,index)=>{
           return (
-          <StyledList key={todo.id} style={{ backgroundColor: todo.done ? 'green' : '' }} > 
+          <StyledList key={todo.id} style={{ backgroundColor: todo.done ? '#5efc8d' : '' }} > 
             {todo.text} 
             <div >
               <img src={doneIcon} 

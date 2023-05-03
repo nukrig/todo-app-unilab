@@ -18,14 +18,19 @@ function SignUpPage() {
             setPhotoUrl(reader.result);
         };
       };
+    const checkPhotoUrl = () => {
+        if(!photoUrl){
+            alert('Please upload photo...')
+        }
+    }
 
-    const handleSignIn = (event)=>{
+    const handleSubmit = (event)=>{
         event.preventDefault()
-            if(photoUrl && name !== ''){
-                setAllowNextPage(true)
-            }else {
+        if(photoUrl && name !== ''){
+            setAllowNextPage(true)
+        }else {
                 setAllowNextPage('')
-            }
+        }  
     }
 
         useEffect(()=>{
@@ -47,13 +52,18 @@ function SignUpPage() {
 
   return (
     <StarterDiv>
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <FormHeading>Get Started</FormHeading>
             <InputHeading>add a photo</InputHeading>
                 <PhotoContainer>
                     <label>
                         {photoUrl ?  <ProfilePhoto src={photoUrl}/> :<CameraIcon src={cameraIcon}/> }
-                        <PhotoInput type="file" accept="image/*"  onChange={handlePhotoChange} />
+                        <PhotoInput 
+                        type="file" 
+                        accept="image/*"  
+                        onChange={handlePhotoChange}
+                        required 
+                        />
                     </label>
                 </PhotoContainer>
             <InputHeading>fill in you name</InputHeading>
@@ -64,8 +74,9 @@ function SignUpPage() {
             onChange={(e)=>{
                 setName(e.target.value)
             }}
+            required
             />
-            <SignUpBtn onClick={handleSignIn}>Sign In</SignUpBtn>
+            <SignUpBtn onClick={checkPhotoUrl} >Sign In</SignUpBtn>
             
         </Form>
     </StarterDiv>
