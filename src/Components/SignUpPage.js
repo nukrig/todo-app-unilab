@@ -74,6 +74,7 @@ function SignUpPage() {
             onChange={(e)=>{
                 setName(e.target.value)
             }}
+            maxLength={30}
             required
             />
             <SignUpBtn onClick={checkPhotoUrl} >Sign In</SignUpBtn>

@@ -89,8 +89,8 @@ function ToDosPage() {
           {todoList.map((todo,index)=>{
           return (
           <StyledList key={todo.id} style={{ backgroundColor: todo.done ? '#5efc8d' : '' }} > 
-            {todo.text} 
-            <div >
+            <p>{todo.text}</p> 
+            <div>
               <img src={doneIcon} 
               style={{marginRight:'29.29px',cursor:'pointer'}}
               onClick={()=>handleClickDone(todo.id)}
@@ -218,7 +218,7 @@ const AddBtn = styled.button`
 `
 const StyledList = styled.li`
   width: 100%;
-  height: 54px;
+  min-height: 54px;
   background-color: #000000;
   border-radius: 4px;
   font-weight: 300;
