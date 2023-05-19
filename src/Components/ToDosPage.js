@@ -6,14 +6,15 @@ import doneIcon from '../media/doneicon.svg'
 import deleteIcon from '../media/deleteicon.svg'
 
 function ToDosPage() {
+  const todos = []
   const photoUrl = localStorage.getItem('photoUrl')
   const name = localStorage.getItem('name')
 
-  const [todoList,setTodoList]=useState(JSON.parse(localStorage.getItem('todoList')) )
+  const [todoList,setTodoList]=useState(JSON.parse(localStorage.getItem('todoList')) || todos)
   const [isDone, setIsDone] = useState(false)
   const [newTodo,setNewTodo]=useState(localStorage.getItem('newTodo') || '')
   const [isLoggedIn,setIsLoggedIn]=useState(true)
-
+  
   const navigate = useNavigate()
   
   useEffect(()=>{
