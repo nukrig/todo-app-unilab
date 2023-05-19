@@ -1,5 +1,5 @@
 import { HashRouter , Routes, Route, Navigate } from "react-router-dom";
-import GlobalStyles from "./Components/GlobalStyle";
+import GlobalStyles from "./GlobalStyle";
 import StarterPage from "./Components/StarterPage";
 import SignUpPage from "./Components/SignUpPage";
 import ToDosPage from "./Components/ToDosPage";

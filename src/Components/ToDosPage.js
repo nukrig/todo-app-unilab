@@ -4,13 +4,12 @@ import { ProfilePhoto } from './SignUpPage';
 import { useEffect,useState } from "react";
 import doneIcon from '../media/doneicon.svg'
 import deleteIcon from '../media/deleteicon.svg'
-import todos from './data';
 
 function ToDosPage() {
   const photoUrl = localStorage.getItem('photoUrl')
   const name = localStorage.getItem('name')
 
-  const [todoList,setTodoList]=useState(JSON.parse(localStorage.getItem('todoList')) || todos)
+  const [todoList,setTodoList]=useState(JSON.parse(localStorage.getItem('todoList')) )
   const [isDone, setIsDone] = useState(false)
   const [newTodo,setNewTodo]=useState(localStorage.getItem('newTodo') || '')
   const [isLoggedIn,setIsLoggedIn]=useState(true)
@@ -31,7 +30,7 @@ function ToDosPage() {
 
 
   const handleClickAdd = () =>  {
-    if(newTodo.length > 0){
+    if(newTodo.length > 0 && newTodo.trim() !== ''){
       todoList.push({id: todoList.length  , text: newTodo, done:false})
       setNewTodo('')
     }
@@ -45,9 +44,10 @@ function ToDosPage() {
     setTodoList(updatedTodos);
   };
 
-  const handleClickDelete = (todoIndex)=>{
+  const handleClickDelete = (todoId)=>{
     const newTodos = todoList.filter((todo,index)=>{
-      return todoIndex !== index
+      // return todoId !== index
+      return todoId !== todo.id
     })
     setTodoList(newTodos)
   }
@@ -88,7 +88,7 @@ function ToDosPage() {
           <ul style={{width:'100%'}}> 
           {todoList.map((todo,index)=>{
           return (
-          <StyledList key={todo.id} style={{ backgroundColor: todo.done ? '#5efc8d' : '' }} > 
+          <StyledList key={Math.random()} style={{ backgroundColor: todo.done ? '#5efc8d' : '' }} > 
             <p>{todo.text}</p> 
             <div>
               <img src={doneIcon} 
@@ -98,7 +98,7 @@ function ToDosPage() {
             />
               <img src={deleteIcon}
               style={{cursor:'pointer'}}
-              onClick={()=>handleClickDelete(index)}
+              onClick={()=>handleClickDelete(todo.id)}
               alt='X'
               />
             </div>

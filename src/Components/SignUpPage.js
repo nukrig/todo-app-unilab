@@ -26,7 +26,7 @@ function SignUpPage() {
 
     const handleSubmit = (event)=>{
         event.preventDefault()
-        if(photoUrl && name !== ''){
+        if(photoUrl && name !== '' && name.trim() !== ''){
             setAllowNextPage(true)
         }else {
                 setAllowNextPage('')
