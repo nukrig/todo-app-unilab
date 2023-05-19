@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/todo-app-unilab/static/js/main.88568510.js",
-    "static/media/todoImg.svg": "/todo-app-unilab/static/media/todoImg.ab12dfb1cba621a56c21e17b4b50593c.svg",
+    "main.js": "/todo-app-unilab/static/js/main.2a9aa3ef.js",
+    "static/media/todoImg.svg": "/todo-app-unilab/static/media/todoImg.bdc73a3bdfa91cb4cc1cf2059bc5fdf4.svg",
     "index.html": "/todo-app-unilab/index.html",
-    "static/media/add-photo.svg": "/todo-app-unilab/static/media/add-photo.3096d799b92968f30a6f7e7a2b5c9acc.svg",
-    "static/media/deleteicon.svg": "/todo-app-unilab/static/media/deleteicon.a24197aa271ccbd1a01e2315e286dcaf.svg",
-    "static/media/doneicon.svg": "/todo-app-unilab/static/media/doneicon.2aa07be6c968315034e232e3c83d97f5.svg",
-    "main.88568510.js.map": "/todo-app-unilab/static/js/main.88568510.js.map"
+    "static/media/add-photo.svg": "/todo-app-unilab/static/media/add-photo.03bcc02c9cc06bb4a1b743f40e330ae2.svg",
+    "static/media/deleteicon.svg": "/todo-app-unilab/static/media/deleteicon.4237c1ab2937db0d3c7ca7eeee639b13.svg",
+    "static/media/doneicon.svg": "/todo-app-unilab/static/media/doneicon.f3120965b8249bcaf024ab07eadb6168.svg",
+    "main.2a9aa3ef.js.map": "/todo-app-unilab/static/js/main.2a9aa3ef.js.map"
   },
   "entrypoints": [
-    "static/js/main.88568510.js"
+    "static/js/main.2a9aa3ef.js"
   ]
 }
